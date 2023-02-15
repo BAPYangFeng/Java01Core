@@ -53,18 +53,23 @@ public class MainAssignment {
 				break;
 			}
 			case 5:{
+				chucNang05();
 				break;
 			}
 			case 6:{
+				chucNang06();
 				break;
 			}
 			case 7:{
+				chucNang07();
 				break;
 			}
 			case 8:{
+				chucNang08();
 				break;
 			}
 			case 9:{
+				chucNang09();
 				break;
 			}
 			case 0:{
@@ -129,13 +134,86 @@ public class MainAssignment {
 		System.out.println("Nhap ma nhan vien can xoa: ");
 		String search = scan.nextLine();
 		search.trim();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getMaNV().toUpperCase().compareTo(search.toUpperCase()) == 0) {
+				list.remove(i);
+				i--;
+			}
+		}
+	}
+	private static void chucNang05() {
+		System.out.println("Nhap ma NV can thay doi: ");
+		String s = scan.nextLine();
+		for (nhanVien nv : list) {
+			if (nv.getMaNV().equalsIgnoreCase(s)) {
+				do {
+					System.out.println("Loai NV(HC/TT/TP): ");
+					String loai = scan.nextLine();
+					if (loai.trim().equalsIgnoreCase("HC")) {
+						nv = new nhanVien();
+						nv.nhap();
+						break;
+					}
+					else if (loai.trim().equalsIgnoreCase("TT")) {
+						nv = new tiepThi();
+						nv.nhap();
+						break;
+					}
+					else if (loai.trim().equalsIgnoreCase("TP")) {
+						nv = new truongPhong();
+						nv.nhap();
+						break;
+					}
+					else {
+						System.out.println("Nhap lai!");
+					}
+				} while (true);
+			}
+		}
+	}
+	private static void chucNang06() {
+		Double min, max;
+		System.out.println("Nhap min: ");
+		try {
+			min = scan.nextDouble();
+		}
+		catch (Exception ex) {
+			min = 0.0;
+		}
+		System.out.println("Nhap max: ");
+		try {
+			max = scan.nextDouble();
+		}
+		catch (Exception ex) {
+			max = 0.0;
+		}
+		final Double fmax = max;
+		final Double fmin = min;
 		list.forEach((e) -> {
-			if (e.getMaNV().toUpperCase().compareTo(search.toUpperCase()) == 0) {
-				list.remove(e);
+			if (e.getLuong() <= fmax && e.getLuong() >= fmin) {
+				e.xuat();
 			}
 		});
 	}
-	
+	private static void chucNang07() {
+		Collections.sort(list, nhanVien.ssHoTen);
+		list.forEach((e) -> {
+			e.xuat();
+		});
+	}
+	private static void chucNang08() {
+		Collections.sort(list, nhanVien.ssThuNhap);
+		list.forEach((e) -> {
+			e.xuat();
+		});
+	}
+	private static void chucNang09() {
+		Collections.sort(list, nhanVien.ssThuNhap);
+		Collections.reverse(list);
+		for (int i = 0; i < Math.min(list.size(), 5); i++) {
+			list.get(i).xuat();
+		}
+	}
 }
 
 

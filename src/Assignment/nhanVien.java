@@ -1,5 +1,6 @@
 package Assignment;
 import java.util.Scanner;
+import java.util.Comparator;
 
 public class nhanVien {
 	private String maNV;
@@ -71,4 +72,22 @@ public class nhanVien {
 		System.out.printf("Thu nhap: %.2f\n", getThuNhap());
 		System.out.println("Thue thu nhap: " + getThueTN());
 	}
+	
+	
+	public static Comparator<nhanVien> ssHoTen = 
+			(nhanVien nv1, nhanVien nv2) -> {
+		return nv1.hoTen.compareToIgnoreCase(nv2.hoTen);
+	};
+	public static Comparator<nhanVien> ssThuNhap = 
+			(nhanVien nv1, nhanVien nv2) -> {
+		if (nv1.getThuNhap() < nv2.getThuNhap()) {
+			return -1;
+		}
+		else if (nv1.getThuNhap() == nv2.getThuNhap()) {
+			return 0;
+		}
+		else {
+			return 1;
+		}
+	};
 }
